@@ -1,3 +1,186 @@
+# Venue Booking API Documentation
+
+### Setup
+- Laravel: 11.21.0
+- PHP: 8.2.19
+- Composer: 2.7
+- Database: sqlite
+
+1. Clone this repository
+2. run `php artisan migrate --seed`
+2. start dev server `php artisan serve`
+- Use postman collect for testing (located in root directory)
+
+### Base URL
+
+`/api/v1/`
+
+## Endpoints
+
+### 1. Create Venue Booking
+
+- **Endpoint:** `/book-venue`
+- **Method:** `POST`
+- **Request Body:**
+
+  ```json
+  {
+    "user_id":1,
+    "venue_id":1,
+    "reservation_date":"2024-09-11",
+    "slot":"6AM-8AM",
+    "team_size":12
+  }
+  ```
+
+- **Response:**
+    - Success (201 Created):
+        ```json
+        {
+            "message": "Venue booking created successfully",
+            "data": {
+                "id": "integer",
+                "user_id": "integer",
+                "venue_id": "integer",
+                "reservation_date": "YYYY-MM-DD",
+                "slot": "string",
+                "team_size": "integer"
+            }
+        }
+        ```
+    - Validation Error (422 Unprocessable Entity):
+        ```json
+        {
+            "message": "Validation failed",
+            "errors": {
+                "user_id": [
+                    "The selected user id is invalid."
+                ]
+            }
+        }
+        ```
+    - Conflict Error (409 Conflict):
+        ```json
+        {
+            "message": "The venue has already booked in the selected date and time slot"
+        }
+        ```
+    - Internal Server Error (500 Internal Server Error):
+        ```json
+        {
+            "message": "Failed to create venue booking"
+        }
+        ```
+
+   
+
+### 2. List Venues
+
+- **Endpoint:** `/list-venues`
+- **Method:** `GET`
+
+- **Response:**
+    ```json
+    {
+        "data": [
+            {
+                "id": 10,
+                "venue_name": "Adrian Key",
+                "game": "badminton",
+                "working_hours": [
+                    "6AM-8AM",
+                    "9AM-11AM",
+                    "12PM-2PM",
+                    "3PM-5PM",
+                    "6PM-8PM"
+                ],
+                "created_at": "2024-08-24T09:56:45.000000Z",
+                "updated_at": "2024-08-24T09:56:45.000000Z",
+                "venue_bookings_count": 14
+            },
+            ......more
+        ],
+        "highlights": {
+            "highest": {
+                "id": 10,
+                "venue_name": "Adrian Key",
+                "game": "badminton",
+                "working_hours": [
+                    "6AM-8AM",
+                    "9AM-11AM",
+                    "12PM-2PM",
+                    "3PM-5PM",
+                    "6PM-8PM"
+                ],
+                "created_at": "2024-08-24T09:56:45.000000Z",
+                "updated_at": "2024-08-24T09:56:45.000000Z",
+                "venue_bookings_count": 14
+            },
+            "lowest": {
+                "id": 8,
+                "venue_name": "Heaney Course",
+                "game": "badminton",
+                "working_hours": [
+                    "6AM-8AM",
+                    "9AM-11AM",
+                    "12PM-2PM",
+                    "3PM-5PM",
+                    "6PM-8PM"
+                ],
+                "created_at": "2024-08-24T09:56:45.000000Z",
+                "updated_at": "2024-08-24T09:56:45.000000Z",
+                "venue_bookings_count": 2
+            }
+        }
+    }
+    ```
+### 3. Venues Performance
+
+- **Endpoint:** `/venues-performance?date_from=2024-08-24&date_to=2024-09-20`
+- **Method:** `GET`
+- **Request Body/Query:**
+
+  ```json
+  {
+    "date_from":"2024-08-24",
+    "date_to":"2024-09-20",
+  }
+  ```
+
+- **Response:**
+    ```json
+    {
+        "data": [
+            {
+                "id": 1,
+                "venue_name": "Samantha Squares",
+                "game": "badminton",
+                "working_hours": [
+                    "6AM-8AM",
+                    "9AM-11AM",
+                    "12PM-2PM",
+                    "3PM-5PM",
+                    "6PM-8PM"
+                ],
+                "created_at": "2024-08-24 09:56:44",
+                "updated_at": "2024-08-24 09:56:44",
+                "venue_bookings_count": 1,
+                "rank": 1,
+                "category": "D"
+            }
+        ]
+    }
+    ```
+
+
+   
+
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
