@@ -1,5 +1,11 @@
 # Venue Booking API Documentation
 
+### Demo
+- https://api-playsport.mhdalik.com/api/v1/list-venues
+- [https://api-playsport.mhdalik.com/api/v1/venues-performance?date_from=2024-07-24&date_to=2024-08-20](https://api-playsport.mhdalik.com/api/v1/venues-performance?date_from=2024-07-24&date_to=2024-08-20)
+- [Book Venue, Try in postman , method:POST](https://api-playsport.mhdalik.com/api/v1/book-venue)
+
+
 ### Setup
 - Laravel: 11.21.0
 - PHP: 8.2.19
@@ -7,8 +13,9 @@
 - Database: sqlite
 
 1. Clone this repository
-2. run `php artisan migrate --seed`
-2. start dev server `php artisan serve`
+1. run `composer install`
+1. run `php artisan migrate --seed`
+1. start dev server `php artisan serve`
 - Use postman collect for testing (located in root directory)
 
 ### Base URL
